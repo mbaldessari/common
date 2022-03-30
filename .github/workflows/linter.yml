@@ -56,6 +56,13 @@ jobs:
         run: |
           make helmlint
 
+      - name: Scan yamls
+        id: kube-lint-scan
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: ./
+          #config: .kube-linter/config.yaml
+
       - name: Run make helm kubeval
         run: |
           curl -L -O https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
