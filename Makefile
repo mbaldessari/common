@@ -48,6 +48,9 @@ API_URL ?= https://raw.githubusercontent.com/hybrid-cloud-patterns/ocp-schemas/m
 kubeconform: ## run helm kubeconform
 	@for t in $(CHARTS); do helm template $(TEST_OPTS) $(PATTERN_OPTS) $$t | kubeconform -strict -skip 'CustomResourceDefinition' -verbose -schema-location $(API_URL); if [ $$? != 0 ]; then exit 1; fi; done
 
+kubelinter: ## run kube-lint by stackrox
+	@for t in $(CHARTS); do kube-linter lint $$t; if [ $$? != 0 ]; then exit 1; fi; done
+
 validate-origin: ## verify the git origin is available
 	git ls-remote $(TARGET_REPO)
 
