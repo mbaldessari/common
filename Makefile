@@ -62,6 +62,6 @@ load-secrets: ## loads the secrets into the vault
 	common/scripts/ansible-push-vault-secrets.sh
 
 ansible-lint: ## run ansible lint on ansible/ folder
-	ansible-lint ansible/
+	podman run -it -v $(PWD):/workspace:rw,z --workdir /workspace --entrypoint "/usr/local/bin/ansible-lint" quay.io/ansible/creator-ee:latest  "-vvv" "ansible/"
 
 .phony: install test
