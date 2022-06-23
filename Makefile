@@ -61,4 +61,7 @@ vault-unseal: ## unseals the vault
 load-secrets: ## loads the secrets into the vault
 	common/scripts/ansible-push-vault-secrets.sh
 
+ansible-lint: ## run ansible lint on ansible/ folder
+	ansible-lint ansible/
+
 .phony: install test
