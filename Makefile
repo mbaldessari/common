@@ -59,7 +59,7 @@ vault-unseal: ## unseals the vault
 	common/scripts/vault-utils.sh vault_unseal common/pattern-vault.init
 
 load-secrets: ## loads the secrets into the vault
-	common/scripts/ansible-push-vault-secrets.sh
+	common/scripts/vault-utils.sh push_secrets common/pattern-vault.init
 
 ansible-lint: ## run ansible lint on ansible/ folder
 	podman run -it -v $(PWD):/workspace:rw,z --workdir /workspace --entrypoint "/usr/local/bin/ansible-lint" quay.io/ansible/creator-ee:latest  "-vvv" "ansible/"
