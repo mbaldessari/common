@@ -25,6 +25,7 @@ clusterGroup:
     activeDeadlineSeconds: 3600
     # By default we run this every 10minutes
     schedule: "*/10 * * * *"
+    unsealVaultSchedule: "*/4 * * * *"
     # Increase ansible verbosity with '-v' or '-vv..'
     verbosity: ""
     serviceAccountCreate: true
