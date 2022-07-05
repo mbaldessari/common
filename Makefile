@@ -44,11 +44,8 @@ validate-origin: ## verify the git origin is available
 		echo "$(TARGET_REPO) - $(TARGET_BRANCH) exists" || \
 		(echo "$(TARGET_BRANCH) not found in $(TARGET_REPO)"; exit 1)
 
-deploy: validate-origin ## deploys the pattern
-	helm install $(NAME) common/install/ $(HELM_OPTS)
-
-upgrade: validate-origin ## runs helm upgrade
-	helm upgrade $(NAME) common/install/ $(HELM_OPTS)
+upgrade deploy: validate-origin ## deploys the pattern
+	helm upgrade --install $(NAME) common/install/ $(HELM_OPTS)
 
 uninstall: ## runs helm uninstall
 	helm uninstall $(NAME)
