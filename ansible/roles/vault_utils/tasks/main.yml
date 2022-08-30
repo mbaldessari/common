@@ -15,6 +15,10 @@
   import_tasks: vault_secrets_init.yaml
   tags: vault_secrets_init
 
+- name: Vault password policy init
+  import_tasks: vault_password_policy.yaml
+  tags: vault_password_policy
+
 - name: Load secrets
   import_tasks: push_secrets.yaml
   tags: push_secrets

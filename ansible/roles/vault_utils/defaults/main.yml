@@ -14,6 +14,13 @@ vault_base_path: "secret"
 vault_path: "{{ vault_base_path }}/{{ vault_hub }}"
 vault_hub_ttl: "15m"
 vault_pki_max_lease_ttl: "8760h"
+vault_password_policy_name: patterns-policy
+vault_password_policy_pwdlen: 25
+# This is a list of absolute paths to additional paths to create
+# It should be in the form of:
+# <policyname>: <absolute path of hcl password policy>
+vault_password_policy_extra_policies: {}
+
 output_file: "common/pattern-vault.init"
 external_secrets_ns: golang-external-secrets
 external_secrets_sa: golang-external-secrets
