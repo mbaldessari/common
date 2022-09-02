@@ -1,0 +1,12 @@
+#!/usr/bin/env bats
+
+load _helpers
+
+@test "acm/policies/application-policies: disabled by default" {
+  cd `chart_dir`
+  local actual=$(helm template \
+      --show-only acm/policies/application-policies.yaml \
+      . | tee /dev/stderr |
+      yq 'length = 0' | tee /dev/stderr)
+  [ "${actual}" = "true" ]
+}

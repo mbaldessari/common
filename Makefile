@@ -17,6 +17,9 @@ TEST_OPTS= -f common/examples/values-secret.yaml -f values-global.yaml --set glo
 	--set clusterGroup.insecureUnsealVaultInsideCluster=true
 PATTERN_OPTS=-f common/examples/values-example.yaml
 EXECUTABLES=git helm oc ansible
+TEST_IMAGE?=vp-common-test
+# filter bats unit tests to run.
+UNIT_TESTS_FILTER?='.*'
 
 .PHONY: help
 help: ## This help message
@@ -33,6 +36,9 @@ test: ## run helm tests
 	@for t in $(CHARTS); do common/scripts/test.sh $$t naked ""; if [ $$? != 0 ]; then exit 1; fi; done
 # Test the charts as the pattern would drive them
 	@for t in $(CHARTS); do common/scripts/test.sh $$t normal "$(TEST_OPTS) $(PATTERN_OPTS)"; if [ $$? != 0 ]; then exit 1; fi; done
+
+test-unit: ## run unit tests
+	@podman run --rm --security-opt=label=disable -it -v ${PWD}:/helm-test $(TEST_IMAGE) bats -f $(UNIT_TESTS_FILTER) /helm-test/tests/unit
 
 helmlint: ## run helm lint
 	@for t in $(CHARTS); do helm lint $(TEST_OPTS) $(PATTERN_OPTS) $$t; if [ $$? != 0 ]; then exit 1; fi; done
