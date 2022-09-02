@@ -4,7 +4,7 @@ name=$(echo $1 | sed -e s@/@-@g -e s@charts-@@)
 TEST_VARIANT="$2"
 CHART_OPTS="$3"
 
-TESTDIR=tests
+TESTDIR=tests/helm
 REFERENCE=${TESTDIR}/${name}-${TEST_VARIANT}.expected.yaml
 OUTPUT=${TESTDIR}/.${name}-${TEST_VARIANT}.expected.yaml
 #REFERENCE=${TESTDIR}/${name}.expected.yaml
