@@ -42,12 +42,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Set up yq
+        uses: chrisdickinson/setup-yq@latest
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install jsonschema
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
-          chmod +x /usr/bin/yq
 
       - name: Verify json schema
         run: |
