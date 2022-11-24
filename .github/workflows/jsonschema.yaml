@@ -42,14 +42,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Set up yq
-        uses: chrisdickinson/setup-yq@latest
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install jsonschema
+          pip install check-jsonschema
 
       - name: Verify json schema
         run: |
-          yq eval examples/secrets/values-secret.v2.yaml -o json | jsonschema -o pretty ansible/roles/vault_utils/values-secrets.v2.schema.json
+          check-jsonschema --schemafile ./ansible/roles/vault_utils/values-secrets.v2.schema.json examples/secrets/values-secret.v2.yaml
