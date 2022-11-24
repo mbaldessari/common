@@ -52,4 +52,4 @@ jobs:
 
       - name: Verify json schema
         run: |
-          yq eval examples/secrets/values-secret.v2.yaml -o json | jsonschema -o pretty ansible/roles/vault_utils/values-secrets.v2.schema.json
+          yq examples/secrets/values-secret.v2.yaml -o json | jsonschema -o pretty ansible/roles/vault_utils/values-secrets.v2.schema.json
