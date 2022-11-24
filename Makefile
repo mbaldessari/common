@@ -111,5 +111,10 @@ ansible-lint: ## run ansible lint on ansible/ folder
 ansible-unittest: ## run ansible unit tests
 	pytest -r a --fulltrace --color yes ansible/tests/unit/test_*.py
 
+# https://github.com/coveooss/json-schema-for-humans
+generate-schema-docs: ## generates documentation from json schema
+	generate-schema-doc --config examples_as_yaml --config expand_buttons ansible/roles/vault_utils/values-secrets.v2.schema.json ansible/roles/vault_utils/values-secret-docs/values-secrets.v2.html
+	generate-schema-doc --config template_name=md --config examples_as_yaml --config expand_buttons ansible/roles/vault_utils/values-secrets.v2.schema.json ansible/roles/vault_utils/values-secret-docs/values-secrets.v2.md
+
 .phony: install test
 
